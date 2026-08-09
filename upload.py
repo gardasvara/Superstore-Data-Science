@@ -1,7 +1,20 @@
 import pandas as pd
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
 
-DATABASE_URL = "postgresql://postgres:gardasvarascience@db.pcagjhiefuxoqnydjrzb.supabase.co:5432/postgres"
+load_dotenv()
+
+USER = os.getenv("user")
+PASSWORD = os.getenv("password")
+HOST = os.getenv("host")
+PORT = os.getenv("port")
+DBNAME = os.getenv("dbname")
+
+DATABASE_URL = (
+    f"postgresql+psycopg2://{USER}:{PASSWORD}"
+    f"@{HOST}:{PORT}/{DBNAME}?sslmode=require"
+)
 
 engine = create_engine(DATABASE_URL)
 
